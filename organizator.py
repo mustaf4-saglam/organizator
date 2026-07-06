@@ -5,6 +5,20 @@ os.environ["GRPC_DNS_RESOLVER"] = "native"
 from google import genai
 from google.genai import types
 client=genai.Client(api_key="GOOGLE_API_KEY_HERE")
+
+def dosya_turu_belirle(dosya_adi):
+   resim_uzantilari = [".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp", ".svg", ".tif", ".tiff"]
+   ses_uzantilari = [".mp3", ".wav", ".flac", ".m4a", ".aac", ".ogg", ".oga", ".wma"]
+   video_uzantilari = [".mp4", ".mov", ".avi", ".mkv", ".wmv", ".webm", ".m4v"]
+   uzanti = os.path.splitext(dosya_adi)[1].lower()
+   if uzanti in resim_uzantilari:
+      return "Resimler"
+   if uzanti in ses_uzantilari:
+      return "Sesler"
+   if uzanti in video_uzantilari:
+      return "Videolar"
+   return None
+
 def tahmin_ai(dosya_adi, satirlar, mevcut_klasorler):
  prompt = f"""
 Sen akıllı bir dosya düzenleyicisin. Şu dosya adını ve ilk  7  satırını analiz et analiz et: dosya adı; '{dosya_adi}' içeriği; {satirlar}
@@ -36,11 +50,11 @@ for dosya in dosyalar:
       continue
 
    mevcut_klasorler = [k for k in os.listdir() if os.path.isdir(k) and not k.startswith(".")]
-   with open(dosya, "r", encoding="utf-8") as dosya1:
-      satirlar = dosya1.readlines()[:7]
-
-   
-   hedef_klasor = tahmin_ai(dosya, satirlar, mevcut_klasorler)
+   hedef_klasor = dosya_turu_belirle(dosya)
+   if hedef_klasor is None:
+      with open(dosya, "r", encoding="utf-8") as dosya1:
+         satirlar = dosya1.readlines()[:7]
+      hedef_klasor = tahmin_ai(dosya, satirlar, mevcut_klasorler)
 
    os.makedirs(hedef_klasor, exist_ok=True)
    eski_konum=os.path.join(dosya_yolu, dosya)
