@@ -58,4 +58,5 @@ taşındı port_scanner.py --> Siber_Guvenlik
 Atlandı: 'readme.md' zaten Proje_Dokumanlari içinde mevcut.
 işlem tamamlandı 3 adet dosya taşındı.
 ⚠️ Önemli Notlar
-Çok fazla dosya içeren klasörlerde, Google API'nin ücretsiz limitlerine takılmamak için taşıma işlemi arasına time.sleep(15) eklenmiştir. İşlem biraz sürebilir, terminali kapatmayın.
+Çok fazla dosya içeren klasörlerde, Google API'nin ücretsiz limitlerine takılmamak için taşıma işlemi arasına time.sleep(15) eklenmiştir.
+İşlem biraz sürebilir, terminali kapatmayın.
