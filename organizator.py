@@ -5,9 +5,9 @@ os.environ["GRPC_DNS_RESOLVER"] = "native"
 from google import genai
 from google.genai import types
 client=genai.Client(api_key="GOOGLE_API_KEY_HERE")
-def tahmin_ai(dosya_adi):
+def tahmin_ai(dosya_adi, satirlar, mevcut_klasorler):
  prompt = f"""
-Sen akıllı bir dosya düzenleyicisin. Şu dosya adını analiz et: '{dosya_adi}'
+Sen akıllı bir dosya düzenleyicisin. Şu dosya adını ve ilk  7  satırını analiz et analiz et: dosya adı; '{dosya_adi}' içeriği; {satirlar}
     
     Bulunduğun dizinde şu ana kadar şu klasörler var: {mevcut_klasorler}
     
@@ -34,8 +34,13 @@ for dosya in dosyalar:
       continue
    if os.path.isdir(dosya):
       continue
+
    mevcut_klasorler = [k for k in os.listdir() if os.path.isdir(k) and not k.startswith(".")]
-   hedef_klasor = tahmin_ai(dosya)
+   with open(dosya, "r", encoding="utf-8") as dosya1:
+      satirlar = dosya1.readlines()[:7]
+
+   
+   hedef_klasor = tahmin_ai(dosya, satirlar, mevcut_klasorler)
 
    os.makedirs(hedef_klasor, exist_ok=True)
    eski_konum=os.path.join(dosya_yolu, dosya)
