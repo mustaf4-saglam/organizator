@@ -3,18 +3,26 @@ import shutil
 import time
 os.environ["GRPC_DNS_RESOLVER"] = "native"
 from google import genai
-client=genai.Client(api_key="GOOGLE_API_KEY")
+from google.genai import types
+client=genai.Client(api_key="GOOGLE_API_KEY_HERE")
 def tahmin_ai(dosya_adi):
  prompt = f"""
-Sen akıllı bir dosya düzenleyicisin. 
-    Şu dosya adını analiz et: '{dosya_adi}'
-    Bu dosya hangi klasöre gitmeli? 
-    eğer bir kod projesi ise aynı klasöre koymayı unutma.
-    Lütfen sadece klasör adını tek veya iki kelime olarak yaz. (Örn: Ders_Notları, Finans, Siber_Güvenlik, Kod_Projesi)
+Sen akıllı bir dosya düzenleyicisin. Şu dosya adını analiz et: '{dosya_adi}'
+    
+    Bulunduğun dizinde şu ana kadar şu klasörler var: {mevcut_klasorler}
+    
+    KURALLAR:
+    1. Eğer bu dosya yukarıdaki mevcut klasörlerden birinin içine mantıken uyuyorsa, SADECE o klasörün adını yaz (birebir aynı yazıma dikkat et).
+    2. Eğer dosya mevcut klasörlerin HİÇBİRİNE uymuyorsa, içeriğine uygun yepyeni bir klasör adı uydur (tek veya iki kelime).
+    3. Kod dosyaları (örneğin .py, .c, .js vb.) mantıklı bir şekilde gruplanmalı.
+    4. Sadece klasör adını yaz, nokta veya açıklama ekleme.
 """
  response = client.models.generate_content(
-        model='gemini-2.0-flash',
+        model='gemini-3.1-flash-lite',
         contents=prompt,
+        config=types.GenerateContentConfig(
+            temperature=0.0
+            )
     )
  return response.text.strip()
 
@@ -26,6 +34,7 @@ for dosya in dosyalar:
       continue
    if os.path.isdir(dosya):
       continue
+   mevcut_klasorler = [k for k in os.listdir() if os.path.isdir(k) and not k.startswith(".")]
    hedef_klasor = tahmin_ai(dosya)
 
    os.makedirs(hedef_klasor, exist_ok=True)
