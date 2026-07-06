@@ -11,7 +11,7 @@ Klasik dosya düzenleyiciler dosyaları sadece uzantılarına (örn: `.pdf`, `.t
   - 
 ## 🛠️ Kullanılan Teknolojiler
 - **Dil:** Python 3
-- **Yapay Zeka:** Google GenAI SDK (`gemini-2.0-flash` modeli)
+- **Yapay Zeka:** Google GenAI SDK (`gemini-3.1-flash-lite` modeli)
 - **Kütüphaneler:** `os`, `shutil`, `time`, `python-dotenv`
 
 ---
