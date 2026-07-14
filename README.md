@@ -50,8 +50,8 @@ pip install -r requirements.txt
 4. API Anahtarınızı Tanımlayın
 
 API_KEY=sizin_google_api_anahtariniz_buraya_gelecek
-💻 Kullanım
-Tüm kurulumları tamamladıktan sonra, düzenlemek istediğiniz dosyaların bulunduğu dizinde betiği çalıştırmanız yeterlidir:
+## 💻 Kullanım
+# Tüm kurulumları tamamladıktan sonra, düzenlemek istediğiniz dosyaların bulunduğu dizinde betiği çalıştırmanız yeterlidir:
 
 ``` Bash
 python3 organizator.py
