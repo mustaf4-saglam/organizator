@@ -23,30 +23,39 @@ Projeyi kendi yerel ortamınızda çalıştırmak için aşağıdaki adımları 
 ### 1. Projeyi Klonlayın
 ```bash
 git clone [https://github.com/mustaf4-saglam/organizator.git](https://github.com/mustaf4-saglam/organizator.git)
+```
+``` bash
 cd organizator
-2. Sanal Ortam (Virtual Environment) Oluşturun
+```
+## 2. Sanal Ortam (Virtual Environment) Oluşturun
 Proje bağımlılıklarının sisteminizle çakışmaması için bir sanal ortam oluşturun ve aktifleştirin:
 
-Bash
-# Sanal ortam oluşturma
+
+## Sanal ortam oluşturma
+``` bash
 python3 -m venv venv
-
-# Linux / MacOS için aktifleştirme:
+```
+## Linux / MacOS için aktifleştirme:
+``` bash
 source venv/bin/activate
-
-# Windows için aktifleştirme:
+```
+## Windows için aktifleştirme:
+``` bash
 venv\Scripts\activate
+```
 3. Gerekli Kütüphaneleri Yükleyin
-Bash
+``` Bash
 pip install -r requirements.txt
+```
 4. API Anahtarınızı Tanımlayın
 
 API_KEY=sizin_google_api_anahtariniz_buraya_gelecek
 💻 Kullanım
 Tüm kurulumları tamamladıktan sonra, düzenlemek istediğiniz dosyaların bulunduğu dizinde betiği çalıştırmanız yeterlidir:
 
-Bash
+``` Bash
 python3 organizator.py
+```
 Çıktı Örneği:
 
 Plaintext
