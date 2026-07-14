@@ -4,7 +4,7 @@ import time
 os.environ["GRPC_DNS_RESOLVER"] = "native"
 from google import genai
 from google.genai import types
-client=genai.Client(api_key="GOOGLE_API_KEY_HERE")
+client=genai.Client(api_key="GOOGLE_API_KEY_IS_HERE")
 
 def dosya_turu_belirle(dosya_adi):
    resim_uzantilari = [".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp", ".svg", ".tif", ".tiff"]
@@ -52,10 +52,24 @@ for dosya in dosyalar:
    mevcut_klasorler = [k for k in os.listdir() if os.path.isdir(k) and not k.startswith(".")]
    hedef_klasor = dosya_turu_belirle(dosya)
    if hedef_klasor is None:
-      with open(dosya, "r", encoding="utf-8") as dosya1:
-         satirlar = dosya1.readlines()[:7]
+      okunabilir_uzantilar = (
+    ".txt", ".md", ".csv", ".log",
+    
+    ".py", ".c", ".cpp", ".h", ".js", ".html", ".css", ".php", ".java", ".sh", ".bash",
+    
+    ".json", ".xml", ".yaml", ".yml", ".ini", ".conf", ".cfg", ".env"
+)
+      satirlar = ""
+      
+      if dosya.lower().endswith(okunabilir_uzantilar):
+          try:
+              with open(dosya, "r", encoding="utf-8", errors="ignore") as dosya1:
+                  satirlar_listesi = dosya1.readlines()[:7]
+                  satirlar = "".join(satirlar_listesi) 
+          except Exception as e:
+              satirlar = "Dosya icerigi okunamadi."
+      
       hedef_klasor = tahmin_ai(dosya, satirlar, mevcut_klasorler)
-
    os.makedirs(hedef_klasor, exist_ok=True)
    eski_konum=os.path.join(dosya_yolu, dosya)
    yeni_konum=os.path.join(dosya_yolu, hedef_klasor, dosya)
