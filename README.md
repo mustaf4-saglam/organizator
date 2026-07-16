@@ -22,7 +22,7 @@ Projeyi kendi yerel ortamınızda çalıştırmak için aşağıdaki adımları 
 
 ### 1. Projeyi Klonlayın
 ```bash
-git clone [https://github.com/mustaf4-saglam/organizator.git](https://github.com/mustaf4-saglam/organizator.git)
+git clone https://github.com/mustaf4-saglam/organizator.git
 ```
 ``` bash
 cd organizator
